@@ -1,0 +1,30 @@
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	version="2.5"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<display-name>cxf</display-name>
+	
+	<!-- 加载 spring容器 -->
+	 <context-param>
+       <param-name>contextConfigLocation</param-name>
+       <param-value>classpath*:*/applicationContext.xml</param-value>
+    </context-param>
+    <listener>
+      <listener-class> org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+	
+
+	<!-- cxf的servlet -->
+	<servlet>
+		<servlet-name>cxf</servlet-name>
+		<servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<!-- 本系统webservice的路径必须以/ws/开头 -->
+	<servlet-mapping>
+		<servlet-name>cxf</servlet-name>
+		<url-pattern>/ws/*</url-pattern>
+	</servlet-mapping>
+	<session-config>
+		<session-timeout>60</session-timeout>
+	</session-config>
+</web-app>
